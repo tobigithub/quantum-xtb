@@ -6,5 +6,14 @@ xtb --opt extreme C6H6-m1.mol |>nul;  obabel -imol xtbopt.mol -oINCHIKEY  ---err
 
 # run xtb+obabel and compare inchikey from input and output structure
 # 6H6-m1.mol is input; xtbopt.mol is output
-# Output: LXTREISRKYHKEO-FBXFSONDSA-N                                     LXTREISRKYHKEO-FBXFSONDSA-N
+# Example:
+# LXTREISRKYHKEO-FBXFSONDSA-N                                     LXTREISRKYHKEO-FBXFSONDSA-N
 xtb --opt extreme C6H6-m1.mol |>nul;  obabel -imol xtbopt.mol -oINCHIKEY  ---errorlevel 0 2>&1  | grep -e "-" | tail -1 > inchikey1.txt; obabel -imol C6H6-m1.mol -oINCHIKEY --errorlevel 0 2>&1  | grep -e "-" | tail -1 > inchikey2.txt; diff inchikey1.txt inchikey2.txt  -y
+
+# run script to check inchikey before and after xtb optimization
+# output "|" designates mismatch between input and xtb optimized structure
+# Example:
+# JMZXDERVARCAST-UHFFFAOYSA-N                                   | LXZBWVMIRSQYJW-PKSYMPFPSA-N
+# ZHDFWBJLLSAJRF-UHFFFAOYSA-N                                   | BPTLXCUATWDSIF-QBQQJPCDSA-N
+# PQZCSMQUGXYYQS-XUOQPGLZSA-N                                     PQZCSMQUGXYYQS-XUOQPGLZSA-N 
+for f in *.mol; do ./comp-inchikey.sh $f; done
