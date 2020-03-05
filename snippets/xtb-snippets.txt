@@ -1,2 +1,6 @@
 # run obabel inchikey conversion on optimized code; output inchikey
 obabel -imol xtbopt.mol -oINCHIKEY  ---errorlevel 0 2>&1  | grep -e "-" | tail -1
+
+# run xtb --opt extreme and calculate inchikey in one line
+xtb --opt extreme C6H6-m1.mol |>nul;  obabel -imol xtbopt.mol -oINCHIKEY  ---errorlevel 0 2>&1  | grep -e "-" | tail -1
+
