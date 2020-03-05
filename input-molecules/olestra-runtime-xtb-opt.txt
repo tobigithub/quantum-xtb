@@ -1,0 +1,23 @@
+           -------------------------------------------------
+          | TOTAL ENERGY             -569.654847326235 Eh   |
+          | GRADIENT NORM               0.000039817039 Eh/a |
+          | HOMO-LUMO GAP               3.245398695758 eV   |
+           -------------------------------------------------
+
+------------------------------------------------------------------------
+ * finished run on 2019/10/13 at 20:38:55.236
+------------------------------------------------------------------------
+ total:
+ * wall-time:     0 d,  2 h, 46 min,  5.831 sec
+ *  cpu-time:     7 d,  1 h, 41 min, 51.717 sec
+ * ratio c/w:    61.301 speedup
+ SCF:
+ * wall-time:     0 d,  0 h,  0 min,  3.705 sec
+ *  cpu-time:     0 d,  0 h,  2 min, 37.527 sec
+ * ratio c/w:    42.515 speedup
+ ANC optimizer:
+ * wall-time:     0 d,  2 h, 46 min,  1.414 sec
+ *  cpu-time:     7 d,  1 h, 38 min, 31.364 sec
+ * ratio c/w:    61.308 speedup
+
+normal termination of xtb
