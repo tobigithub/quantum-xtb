@@ -1,0 +1,2 @@
+# run obabel inchikey conversion on optimized code; output inchikey
+obabel -imol xtbopt.mol -oINCHIKEY  ---errorlevel 0 2>&1  | grep -e "-" | tail -1
