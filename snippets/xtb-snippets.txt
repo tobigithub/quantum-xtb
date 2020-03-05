@@ -4,3 +4,8 @@ obabel -imol xtbopt.mol -oINCHIKEY  ---errorlevel 0 2>&1  | grep -e "-" | tail -
 # run xtb --opt extreme and calculate inchikey in one line
 xtb --opt extreme C6H6-m1.mol |>nul;  obabel -imol xtbopt.mol -oINCHIKEY  ---errorlevel 0 2>&1  | grep -e "-" | tail -1
 
+# run xtb+obabel and compare inchikey from input and output structure
+# 6H6-m1.mol is input; xtbopt.mol is output
+# 
+6H6-m1.mol |>nul;  obabel -imol xtbopt.mol -oINCHIKEY  ---errorlevel 0 2>&1  | grep -e "-" | tail -1 > inchikey1.txt; obabel -imol C6H6-m1.mol -oINCHIKEY --errorlevel 0 2>&1  | grep -e "-" | tail -1 > inchikey2.txt; diff inchikey1.txt inchikey2.txt  -y
+
