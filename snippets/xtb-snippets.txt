@@ -65,6 +65,8 @@ for n in *.mol; do for f in *.mol; do echo -n "$f     "; ./matchmol $n  $f;done 
 
 
 # ---------------------------------------------------------
+# check speed of individual cores
+watch -n5 "cat /proc/cpuinfo | grep \"^[c]pu MHz\""
 
 
 # ---------------------------------------------------------
