@@ -28,7 +28,7 @@ for f in *.mol; do ./comp-inchikey.sh $f; done
 
 # ---------------------------------------------------------
 # filenames can be echoed
-
+for f in *.mol; do echo -n "$f        "; ./comp-inchikey-mol.sh $f; done
 
 # Example output:
 # C6H6-m97.mol       SSSVEDFEAZBMKE-UHFFFAOYSA-N                                | SWKZTARPTFSHCA-SPWIIUKKSA-N
