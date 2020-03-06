@@ -1,18 +1,21 @@
+# ---------------------------------------------------------
+# Collection of code snippets for xtb and crest
+# ---------------------------------------------------------
 # run obabel inchikey conversion on optimized code; output inchikey
 obabel -imol xtbopt.mol -oINCHIKEY  ---errorlevel 0 2>&1  | grep -e "-" | tail -1
 
-
+# ---------------------------------------------------------
 # run xtb --opt extreme and calculate inchikey in one line
 xtb --opt extreme C6H6-m1.mol |>nul;  obabel -imol xtbopt.mol -oINCHIKEY  ---errorlevel 0 2>&1  | grep -e "-" | tail -1
 
-
+# ---------------------------------------------------------
 # run xtb+obabel and compare inchikey from input and output structure
 # 6H6-m1.mol is input; xtbopt.mol is output
 # Example:
 # LXTREISRKYHKEO-FBXFSONDSA-N                                     LXTREISRKYHKEO-FBXFSONDSA-N
 xtb --opt extreme C6H6-m1.mol |>nul;  obabel -imol xtbopt.mol -oINCHIKEY  ---errorlevel 0 2>&1  | grep -e "-" | tail -1 > inchikey1.txt; obabel -imol C6H6-m1.mol -oINCHIKEY --errorlevel 0 2>&1  | grep -e "-" | tail -1 > inchikey2.txt; diff inchikey1.txt inchikey2.txt  -y
 
-
+# ---------------------------------------------------------
 # run script to check inchikey before and after xtb optimization
 # output "|" designates mismatch between input and xtb optimized structure
 # filenames are not sorted according to number!
@@ -23,12 +26,45 @@ for f in *.mol; do ./comp-inchikey.sh $f; done
 # ZHDFWBJLLSAJRF-UHFFFAOYSA-N                                   | BPTLXCUATWDSIF-QBQQJPCDSA-N
 # PQZCSMQUGXYYQS-XUOQPGLZSA-N                                     PQZCSMQUGXYYQS-XUOQPGLZSA-N 
 
-
+# ---------------------------------------------------------
 # filenames can be echoed
-for f in *.mol; do echo -n "$f       ";  ./comp-inchikey.sh $f; done
+
 
 # Example output:
 # C6H6-m97.mol       SSSVEDFEAZBMKE-UHFFFAOYSA-N                                | SWKZTARPTFSHCA-SPWIIUKKSA-N
 # C6H6-m98.mol       JMZXDERVARCAST-UHFFFAOYSA-N                                | LXZBWVMIRSQYJW-PKSYMPFPSA-N
 # C6H6-m99.mol       ZHDFWBJLLSAJRF-UHFFFAOYSA-N                                | BPTLXCUATWDSIF-QBQQJPCDSA-N
 # C6H6-m9.mol       PQZCSMQUGXYYQS-XUOQPGLZSA-N                                   PQZCSMQUGXYYQS-XUOQPGLZSA-N
+
+
+# ---------------------------------------------------------
+# find needle in haystack (checkmol/matchmol)
+# Documentation: https://homepage.univie.ac.at/norbert.haider/cheminf/cmmm.html
+# Download (source/bin) http://merian.pch.univie.ac.at/pch/download/chemistry/checkmol/
+# Example output: C6H6-m83.mol     1:T
+
+for f in *.mol; do echo -n "$f     "; ./matchmol C6H6-m83.mol  $f;done | grep T
+
+
+# ---------------------------------------------------------
+# Dual loop to find needle in haystack (matchmol) across all files in folder
+# Output:
+# C6H6-m120.mol     1:T
+# C6H6-m121.mol     1:T
+# C6H6-m122.mol     1:T
+
+for n in *.mol; do for f in *.mol; do echo -n "$f     "; ./matchmol $n  $f;done | grep T; done
+
+# ---------------------------------------------------------
+
+
+# ---------------------------------------------------------
+
+
+# ---------------------------------------------------------
+
+
+# ---------------------------------------------------------
+
+
+# ---------------------------------------------------------
